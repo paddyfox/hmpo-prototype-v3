@@ -1,0 +1,22 @@
+{% extends "layout-apply.html" %}
+
+{% set hmpoTitle %}Which country were you born in?{% endset %}
+
+{% block mainContent %}
+
+    {% call hmpoForm(ctx) %}
+
+        {{ hmpoSelect(ctx, {
+            id: "countryOfBirth",
+            label: {
+                text: hmpoTitle
+            },
+            isPageHeading: true,
+            placeholder: true
+        }) }}
+
+        {{ hmpoSubmit(ctx) }}
+
+    {% endcall %}
+
+{% endblock %}

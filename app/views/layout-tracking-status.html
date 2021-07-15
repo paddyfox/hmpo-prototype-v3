@@ -1,0 +1,83 @@
+{% extends "layout-tracking.html" %}
+
+{% set hmpoTitle %}Application history{% endset %}
+
+{% block backLink %}{% endblock %}
+
+{% block mainContent %}
+
+    <div class="govuk-panel status-header">
+        {% block trackingHeader %}{% endblock %}
+    </div>
+
+    {% block trackingBody %}{% endblock %}
+
+    {% block trackingsidebar %}
+        {% call hmpoSidebar({ classes: "sidebar-task" }) %}
+            <ul class="sidebar-task__panel-group">
+                <li class="sidebar-task__panel">
+                    <h3>Application reference</h3>
+                    <p>{{ values.formattedReference }}</p>
+                </li>
+
+                {% if values.documentsRequired != "none" %}
+                    <li class="sidebar-task__panel">
+                        <h3>Documents</h3>
+                        <p><a target="_blank" href="/help/documents">What you need to send</a></p>
+                    </li>
+                {% endif %}
+
+                {% if values.status != "AWAITING_REFEREE_NOMINATION" %}
+                    <li class="sidebar-task__panel">
+                        <h3>Tell us what you think</h3>
+                        <p><a target="_blank" href="/">Fill in a survey about this service</a></p>
+                    </li>
+                {% endif %}
+            </ul>
+        {% endcall %}
+    {% endblock %}
+
+    {% block trackingHistory %}{% endblock %}
+{% endblock %}
+
+{% macro trackingHistory(history) %}
+    {% set history = history | filter %}
+
+    <hr class="govuk-section-break govuk-section-break--visible">
+
+    {% set trackingStatusRows = [] %}
+
+    {% for item in history %}
+        {% set trackingStatusRows = trackingStatusRows | push([
+            { text: item.text or item },
+            { text: (item.date or values.submitted) | date("h:mma on D MMMM YYYY") }
+        ]) %}
+    {% endfor %}
+
+    {{ govukTable({
+        caption: "Application history",
+        captionClasses: "govuk-heading-m",
+        classes: "status-table",
+        head: [
+            {
+                text: "Status",
+                classes: "govuk-visually-hidden"
+            },
+            {
+                text: "Date",
+                classes: "govuk-visually-hidden"
+            }
+        ],
+        rows: trackingStatusRows
+    }) }}
+{% endmacro %}
+
+{% set footerHtml %}
+    <br><br>
+    Next tracking status:
+    <ul class="govuk-footer__inline-list">
+    {% for status in nextStatuses %}
+        <li><a href="?status={{status}}">{{status}}</a></li>
+    {% endfor %}
+    </ul>
+{% endset %}

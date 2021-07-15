@@ -1,0 +1,35 @@
+{% extends "layout-tracking-status.html" %}
+
+{% block trackingHeader %}
+    <h1>Ask someone to confirm your identity</h1>
+{% endblock %}
+
+{% block trackingBody %}
+    <h2>What you need to do</h2>
+
+    <p>
+        {{values.refereeFirstName}} {{values.refereeSurname}} can’t do this for you – you need to ask someone else.
+        We can’t work on your application until your identity is confirmed.
+    </p>
+
+    {{ hmpoSubmit(ctx, {
+        href: "/track/ask-someone-to-confirm"
+    }) }}
+{% endblock %}
+
+{% block trackingHistory %}
+
+    {{ trackingHistory([
+      "Person not eligible",
+      "Ask someone to confirm your identity",
+      "Application submitted"
+    ]) }}
+
+{% endblock %}
+
+
+{% set nextStatuses = [
+    "REFEREE_NOMINATED",
+    "PAPER_REFEREE_RECEIVED"
+] %}
+

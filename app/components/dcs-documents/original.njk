@@ -1,0 +1,10 @@
+
+{% from "hmpo-warning-text/macro.njk" import hmpoWarningText %}
+
+{% call hmpoWarningText({ iconFallbackText: "Warning" }) %}
+    {% if params.overseas %}
+        You must send original documents, unless we ask for a photocopy.
+    {% else %}
+        You must send original documents - we can’t accept photocopies.
+    {% endif %}
+{% endcall %}

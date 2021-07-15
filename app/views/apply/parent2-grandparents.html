@@ -1,0 +1,136 @@
+{% extends "layout-apply.html" %}
+
+{% set hmpoTitle %}Paternal grandparents{% endset %}
+
+{% block mainContent %}
+    <h1>{{ hmpoTitle }}</h1>
+
+    {% call hmpoForm(ctx) %}
+
+        <p>Enter as many details as you can about your father’s parents. For same sex couples, these are parent 2’s parents.</p>
+
+        <h2>Grandmother</h2>
+
+        {{ hmpoText(ctx, {
+            attributes: { autocapitalize: "words" },
+            id: "parent2Parent1FirstName",
+            label: "First and middle names"
+        }) }}
+
+        {{ hmpoText(ctx, {
+            attributes: { autocapitalize: "words" },
+            id: "parent2Parent1LastName",
+            label: "Last name"
+        }) }}
+
+        {{ hmpoText(ctx, {
+            attributes: { autocapitalize: "words" },
+            id: "parent2Parent1TownOfBirth",
+            label: "Town of birth"
+        }) }}
+
+        {{ hmpoSelect(ctx, {
+            id: "parent2Parent1CountryOfBirth",
+            label: "Country of birth",
+            placeholder: true
+        }) }}
+
+        {{ hmpoDate(ctx, {
+            id: "parent2Parent1DateOfBirth",
+            legend: "Date of birth",
+            hint: "For example, 31 08 1970"
+        }) }}
+
+        {{ hmpoDetails({
+            summaryText: "I can’t provide these details",
+            id: "parent2Parent1ReasonReveal",
+            html: hmpoTextarea(ctx, {
+                id: "parent2Parent1NoDetailsReason",
+                label: {
+                    text: "Tell us why",
+                    classes: "govuk-label--m"
+                }
+            }),
+            open: "true" if values.parent2Parent1NoDetailsReason or errors.parent2Parent1NoDetailsReason
+        }) }}
+
+        <h2>Grandfather</h2>
+
+        {{ hmpoText(ctx, {
+            attributes: { autocapitalize: "words" },
+            id: "parent2Parent2FirstName",
+            label: "First and middle names"
+        }) }}
+
+        {{ hmpoText(ctx, {
+            attributes: { autocapitalize: "words" },
+            id: "parent2Parent2LastName",
+            label: "Last name"
+        }) }}
+
+        {{ hmpoText(ctx, {
+            attributes: { autocapitalize: "words" },
+            id: "parent2Parent2TownOfBirth",
+            label: "Town of birth"
+        }) }}
+
+        {{ hmpoSelect(ctx, {
+            id: "parent2Parent2CountryOfBirth",
+            label: "Country of birth",
+            placeholder: true
+        }) }}
+
+        {{ hmpoDate(ctx, {
+            id: "parent2Parent2DateOfBirth",
+            legend: "Date of birth",
+            hint: "For example, 31 08 1970"
+        }) }}
+
+        {{ hmpoDetails({
+            summaryText: "I can’t provide these details",
+            id: "parent2Parent2ReasonReveal",
+            html: hmpoTextarea(ctx, {
+                id: "parent2Parent2NoDetailsReason",
+                label: {
+                    text: "Tell us why",
+                    classes: "govuk-label--m"
+                }
+            }),
+            open: "true" if values.parent2Parent2NoDetailsReason or errors.parent2Parent2NoDetailsReason
+        }) }}
+
+        {{ hmpoRadios(ctx, {
+            id: "parent2ParentsMarried",
+            inline: true,
+            legend: {
+                text: "Were they married or in a civil partnership?",
+                classes: "govuk-label--m"
+            },
+            items: [{
+                value: true
+            }, {
+                value: false
+            }, {
+                value: 'unknown',
+                text: "I don’t know"
+            }],
+            conditionals: {
+                "true": {
+                    id: "parent2ParentsMarriageDateReveal",
+                    html: hmpoDate(ctx, {
+                        id: "parent2ParentsMarriageDate",
+                        legend: {
+                            text: "Date of marriage or civil partnership",
+                            classes: "govuk-fieldset__legend--m"
+                        },
+                        hint: "For example 25 08 2012, leave this blank if you can’t provide it"
+                    })
+                }
+            }
+        }) }}
+
+        {{ hmpoSubmit(ctx) }}
+
+    {% endcall %}
+
+{% endblock %}

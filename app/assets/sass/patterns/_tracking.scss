@@ -1,0 +1,101 @@
+.sidebar-task {
+    top: 0;
+    margin: 0;
+
+    .hmpo-sidebar__inner {
+        border: none;
+        padding: 0;
+    }
+
+    .sidebar-task__panel-group {
+        display: flex;
+        flex-flow: column-reverse;
+        margin: 0;
+    }
+
+    .sidebar-task__panel {
+        padding: ($govuk-gutter / 2) 0;
+        margin: 0;
+        border: solid $govuk-border-colour;
+        border-width: 1px 0 0 0;
+        h3 {
+            font-size: 18px;
+            margin: 0 0 5px 0;
+        }
+        p {
+            margin: 0
+        }
+    }
+
+    @include govuk-media-query($from: tablet) {
+        .sidebar-task__panel-group {
+            display: block;
+        }
+        .sidebar-task__panel {
+            padding: $govuk-gutter / 2;
+            border-width: 1px 1px 0 1px;
+            h3, p {
+                padding: 0;
+                margin: 0;
+            }
+            &:first-child {
+                border-top-width: 1px;
+            }
+            &:last-child {
+                border-bottom-width: 1px;
+            }
+        }
+    }
+}
+
+.status-header {
+    background: govuk-colour("light-grey");
+    color:  govuk-colour("black");
+    margin: 0 0 20px 0;
+    border: 0;
+    padding: 15px;
+    @include govuk-media-query($from: tablet) {
+        margin: 0 0 30px 0;
+        min-height: 129px;
+        box-sizing: content-box;
+        min-height: 129px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    h1 {
+        font-size: 36px;
+        margin: 15px 0
+    }
+    p {
+        font-size: 19px;
+    }
+}
+
+.status-table {
+    margin: $govuk-gutter/2 0;
+    @include govuk-media-query($from: tablet) {
+        margin-bottom: $govuk-gutter;
+    }
+    tr {
+        td {
+            font-size: 16px;
+        }
+    }
+}
+
+
+.photo-resub-notice {
+    border: 3px solid $govuk-error-colour;
+    padding: $govuk-gutter-half $govuk-gutter*2 $govuk-gutter-half $govuk-gutter-half;
+    margin-bottom: $govuk-gutter;
+    position: relative;
+
+    .icon {
+        position: absolute;
+        top: $govuk-gutter-half;
+        right: $govuk-gutter-half;
+    }
+}

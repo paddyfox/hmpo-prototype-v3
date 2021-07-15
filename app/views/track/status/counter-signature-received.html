@@ -1,0 +1,43 @@
+{% extends "layout-tracking-status.html" %}
+
+{% block trackingHeader %}
+    <h1>We received your form</h1>
+{% endblock %}
+
+{% block trackingBody %}
+    <p>Thank you for submitting the countersignature form.</p>
+    <p>We’ll now carry on with your application.</p>
+
+    {% if values.mobileNotification and values.emailNotification %}
+        <h2>What happens next</h2>
+        <p>We’ll text and email you when your application is approved.</p>
+    {% elif values.mobileNotification %}
+        <h2>What happens next</h2>
+        <p>We’ll text you when your application is approved.</p>
+    {% elif values.emailNotification %}
+        <h2>What happens next</h2>
+        <p>We’ll email you when your application is approved.</p>
+    {% endif %}
+{% endblock %}
+
+{% block trackingHistory %}
+
+    {{ trackingHistory([
+      "Supporting document received",
+      "Countersignature needed: on hold",
+      "Application being processed",
+      "Form confirming identity received" if values.documentsRequired == "none" else "Documents received",
+      "Application received",
+      "Identity details received" if values.csigRequired,
+      "Email sent to person confirming your identity" if values.csigRequired,
+      "Ask someone to confirm your identity" if values.csigRequired,
+      "Application submitted"
+    ]) }}
+
+{% endblock %}
+
+
+{% set nextStatuses = [
+    "APPLICATION_APPROVED"
+] %}
+

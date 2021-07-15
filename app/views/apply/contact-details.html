@@ -1,0 +1,43 @@
+{% extends "layout-apply.html" %}
+
+{% set hmpoTitle %}Contact details{% endset %}
+
+{% block mainContent %}
+
+    <h1 id="header">{{ hmpoTitle }}</h1>
+    <p>It’s best to use a phone that you’ll have access to. We may contact you if there’s a problem with your
+        application.</p>
+
+    {% call hmpoForm(ctx) %}
+        {{ hmpoText(ctx, {
+            id: "contactEmail",
+            attributes: { autocapitalize: "off" },
+            label: {
+                text:"Email" ,
+                classes: "govuk-label--m"
+                }
+        }) }}
+        {{ hmpoText(ctx, {
+            id: "contactEmailConfirm",
+            attributes: { autocapitalize: "off" },
+            noPaste: "true",
+            label: {
+                text:"Confirm your email" ,
+                classes: "govuk-label--m"
+                }
+        }) }}
+
+        {{ hmpoPhone(ctx, {
+            id: "contactPhone",
+            label: {
+                text: "Mobile or home phone",
+                classes: "govuk-label--m"
+            },
+            classes: "govuk-!-width-one-half"
+        }) }}
+
+        {{ hmpoSubmit(ctx) }}
+
+    {% endcall %}
+
+{% endblock %}

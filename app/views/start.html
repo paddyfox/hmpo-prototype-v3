@@ -1,0 +1,144 @@
+{% extends "layout.html" %}
+
+{% set hmpoTitle %}Apply online for a UK passport{% endset %}
+
+{% block pageTitle %}
+    {{ hmpoTitle | safe }} – GOV.UK
+{% endblock %}
+
+{% block phaseBanner %}
+{% endblock %}
+
+{% block govukHeader %}
+    {{ govukHeader({
+        assetsPath: assetPath + '/images',
+        homepageUrl: govukHomePage or "https://gov.uk",
+        serviceName: "",
+        navigation: govukNavigation,
+        serviceUrl: govukServiceUrl or "/",
+        containerClasses: "govuk-width-container"
+    }) }}
+{% endblock %}
+
+{% block beforeContent %}
+    {{ govukBreadcrumbs({
+        items: [
+            {
+                text: "Home",
+                href: "#"
+            },
+            {
+                text: "Passports, travel and living abroad",
+                href: "#"
+            },
+            {
+                text: "Passports"
+            }
+        ]
+    }) }}
+{% endblock %}
+
+{# TODO: Update h1 and app-related-items styling to new GOV.UK styling #}
+{% block content %}
+    <div class="govuk-grid-row">
+        <main id="content" role="main" class="">
+            <header class="page-header govuk-grid-column-two-thirds">
+                <div class="">
+                    <h1 class="govuk-heading-xl">{{ hmpoTitle }}</h1>
+                </div>
+            </header>
+
+            <div class="govuk-grid-column-two-thirds-from-desktop">
+
+
+                <p>Use this service to apply for, renew, replace or update your passport and pay for it online.</p>
+                <p>This service is also available <a href="https://www.gov.uk/ymgeisio-adnewyddu-pasbort">in Welsh(Cymraeg)</a>.</p>
+
+                {% call hmpoInsetText() %}
+                    <p>If your passport is burgundy or has ‘European Union’ on the cover, you can continue to use it until it expires.</p>
+                {% endcall %}
+
+                <h2>How long it takes</h2>
+                <p>Allow up to 10 weeks to get your passport.</p>
+                <p>You can <a href="https://www.gov.uk/get-a-passport-urgently">get a passport urgently</a> if you need one sooner.</p>
+                <p>Do not book travel until you have a valid passport - your new passport will not have the same number as your old one.</p>
+
+                <h2>Before you start</h2>
+                <p>You’ll need a debit or credit card to use this service.</p>
+                <p><a href="https://www.gov.uk/passport-fees">It’s £9.50 cheaper</a> to apply for a passport online than by post.</p>
+
+                {{ govukButton({
+                    text: "Start now",
+                    href: "/filter",
+                    isStartButton: true
+                }) }}
+
+                <br/>
+                <br/>
+
+                <section class="more">
+                    <div id="before-you-start">
+                        <h2 class="govuk-heading-m">Other ways to apply</h2>
+
+                        <div class="gem-c-govspeak govuk-govspeak ">
+                            <div role="note" aria-label="Information" class="application-notice info-notice">
+                            </div>
+
+                            <p>You can pick up passport application forms from your <a rel="external"
+                                    href="http://www.postoffice.co.uk/branch-finder">local Post Office</a> and apply by
+                                post, or use the <a
+                                    href="https://www.gov.uk/how-the-post-office-check-and-send-service-works">Post Office
+                                    Check and Send service</a>.
+                            </p>
+                                <p>It takes longer to apply by post than online.</p>
+                
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <div class="govuk-grid-column-one-third-from-desktop app-related-items">
+            <h3 id="parent-subsection" style="margin-bottom: 10px;">Related content</h3>
+            <nav role="navigation" aria-labelledby="parent-subsection">
+                <ul>
+                    <li>
+                        <a href="https://www.gov.uk/passport-fees">Passport fees</a>
+                    </li>
+                    <li>
+                        <a href="https://www.gov.uk/photos-for-passports">Get a passport photo</a>
+                    </li>
+                    <li>
+                        <a href="https://www.gov.uk/changing-passport-information">Change your name or personal details on your passport</a>
+                    </li>
+                    <li>
+                        <a href="https://www.gov.uk/apply-first-adult-passport">Getting your first adult passport</a>
+                    </li>
+                    <li>
+                        <a href="https://www.gov.uk/get-a-child-passport">Get a passport for your child</a>
+                    </li>
+                    <li>
+                        <a href="https://www.gov.uk/visit-europe-1-january-2021">Visit Europe from 1 January 2021</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="govuk-grid-column-two-thirds-from-desktop app-related-items">
+            <nav role="navigation">
+                <h3 class="navigation__sub-heading">
+                    Explore the topic
+                </h3>
+                <ul>
+                    <li class="navigation__link"><a class="navigation__section-link" href="https://www.gov.uk/browse/abroad/passports">Passports</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

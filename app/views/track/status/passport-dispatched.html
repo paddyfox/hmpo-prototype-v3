@@ -1,0 +1,52 @@
+{% extends "layout-tracking-status.html" %}
+
+{% block trackingHeader %}
+    <h1>Your passport is on its way</h1>
+{% endblock %}
+
+{% block trackingBody %}
+    <h2>What happens next</h2>
+
+    <p>
+        We’ve sent your new passport by secure delivery.
+    </p>
+
+    {% if values.documentsRequired == "documents" %}
+        <p>
+            Your documents will arrive separately.
+            They won’t be in the same envelope as your new passport.
+        </p>
+    {% elif values.documentsRequired == "passport" %}
+        <p>
+            Your old passport will arrive separately.
+            It won’t be in the same envelope as your new passport.
+        </p>
+    {% endif %}
+
+    {% call hmpoInsetText(ctx) %}
+        <h2>You must sign your new passport when you receive it</h2>
+        <p>You won’t be able to use it until you do.</p>
+    {% endcall %}
+{% endblock %}
+
+{% block trackingHistory %}
+
+    {{ trackingHistory([
+      "Passport printed and sent",
+      "Application approved",
+      "Application being processed",
+      "Documents received" if values.documentsRequired != "none",
+      "Application received" if values.documentsRequired != "none",
+      "Identity details received" if values.csigRequired,
+      "Email sent to person confirming your identity" if values.csigRequired,
+      "Ask someone to confirm your identity" if values.csigRequired,
+      "Application submitted"
+    ]) }}
+
+{% endblock %}
+
+
+{% set nextStatuses = [
+    "SUBMITTED"
+] %}
+
